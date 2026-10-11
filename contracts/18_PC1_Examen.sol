@@ -19,4 +19,30 @@ contract Almacen253703 {
         posicion = valorPosicion;
         direccion = msg.sender;
     }
+
+    function agregarElemento(
+        uint256 idProducto,
+        string memory nombreProducto,
+        string memory categoriaProducto,
+        uint256 cantidad
+    ) public {
+        require(idProducto % 2 == 0);
+
+        Producto memory nuevoProducto = Producto({
+            id: idProducto,
+            nombre: nombreProducto,
+            categoria: categoriaProducto,
+            stock: cantidad
+        });
+
+        inventario.push(nuevoProducto);
+    }
+
+    function contarElementos() public view returns (uint256) {
+        return inventario.length;
+    }
+
+    function cambiarDireccion(address nuevaDireccion) public {
+        direccion = nuevaDireccion;
+    }
 }
